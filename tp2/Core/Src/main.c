@@ -19,7 +19,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "string.h"
-#include "spi.h"
+#include "AT45DB041E.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -93,7 +93,7 @@ int main(void)
   //MX_SPI1_Init();
   MX_UART4_Init();
   /* USER CODE BEGIN 2 */
-  spi_init();
+  AT45DB041E_init();
   /* USER CODE END 2 */
 
   /* Infinite loop */
