@@ -19,6 +19,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "string.h"
+#include "gpio.h"
 #include "AT45DB041E.h"
 
 /* Private includes ----------------------------------------------------------*/
@@ -50,7 +51,6 @@ UART_HandleTypeDef huart4;
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
-static void MX_GPIO_Init(void);
 //static void MX_SPI1_Init(void);
 static void MX_UART4_Init(void);
 /* USER CODE BEGIN PFP */
@@ -89,11 +89,12 @@ int main(void)
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
-  MX_GPIO_Init();
+ // MX_GPIO_Init();
   //MX_SPI1_Init();
   MX_UART4_Init();
   /* USER CODE BEGIN 2 */
   AT45DB041E_init();
+  gpio_init(LED1_GPIO_Port,LED1_Pin);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -102,7 +103,7 @@ int main(void)
   {
     
     HAL_UART_Transmit(&huart4,"uart tx \n",strlen("uart tx \n"),1000);
-    HAL_Delay(1000);
+    HAL_Delay(100);
     HAL_GPIO_TogglePin(LED1_GPIO_Port,LED1_Pin);
 
     /* USER CODE END WHILE */
@@ -189,31 +190,6 @@ static void MX_UART4_Init(void)
   /* USER CODE BEGIN UART4_Init 2 */
 
   /* USER CODE END UART4_Init 2 */
-
-}
-
-/**
-  * @brief GPIO Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_GPIO_Init(void)
-{
-  GPIO_InitTypeDef GPIO_InitStruct = {0};
-
-  /* GPIO Ports Clock Enable */
-  __HAL_RCC_GPIOA_CLK_ENABLE();
-  __HAL_RCC_GPIOD_CLK_ENABLE();
-
-  /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOD, LED2_Pin|LED1_Pin, GPIO_PIN_RESET);
-
-  /*Configure GPIO pins : LED2_Pin LED1_Pin */
-  GPIO_InitStruct.Pin = LED2_Pin|LED1_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
 }
 

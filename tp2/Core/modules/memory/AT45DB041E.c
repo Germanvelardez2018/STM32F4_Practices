@@ -1,7 +1,12 @@
 #include "AT45DB041E.h"
+#define SPI_CS_PIN                      (10)
+
+
 
 
 void AT45DB041E_init(){
+    spi_init();
+    gpio_init();
 
 }
 
