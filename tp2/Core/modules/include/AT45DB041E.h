@@ -54,6 +54,35 @@ static const uint8_t at45db_pgsize_cmd[] = {
 
 #define AT45DB_LOW_POWER                    (0x9B)  // INTO LOW POWER
 
+#define AT45DB041E_PAGES_DEFAULT             2048   //! En paginas de 256
+
+
+//! Estrutuca con formato de la memoria, copiada de una libreria de github
+typedef struct __flash_storage
+{
+    int pg_num;
+    int pg_shifts;
+    uint32_t block_sz;
+    uint32_t erase_sz;
+    uint32_t n_eraseblocks;
+} flash_storage_t;
+
+
+
+
+
+
+/**
+ * @brief Define el tamanio en bytes de la pagina a utilizar 
+ * 
+ */
+typedef enum {
+     pg_256byte     =  8           //! 2048 Paginas totales  
+    ,pg_512bytes    =  9           //! 1024 Paginas totales
+    ,pg_1024byte    =  10          //! 512  Paginas Totales
+    ,pg_2048bytes   =  11          //! 256  Paginas Totales
+}mem_page_size;
+
 
 
 
@@ -64,11 +93,11 @@ static const uint8_t at45db_pgsize_cmd[] = {
 void AT45DB041E_init();
 
 
-void AT45DB041E_write( uint8_t buffer, uint32_t len);
+uint32_t AT45DB041E_write( uint8_t buffer, uint32_t len,uint32_t page,uint8_t pos);
 
 
 
-void AT45DB041E_read( uint8_t buffer, uint32_t len);
+uint32_t AT45DB041E_read( uint8_t buffer, uint32_t len,uint32_t page,uint8_t pos);
 
 
 

@@ -1,19 +1,7 @@
 #include "main.h"
 #include "spi.h"
 
-
-#define SPI_TIMEOUT             1000
-
-
-
-
 SPI_HandleTypeDef hspi1;
-
-
-
-
-
-
 
 
 /**
@@ -23,8 +11,6 @@ SPI_HandleTypeDef hspi1;
   */
 static void MX_SPI1_Init(void)
 {
-
-  
   hspi1.Instance = SPI1;
   hspi1.Init.Mode = SPI_MODE_MASTER;
   hspi1.Init.Direction = SPI_DIRECTION_2LINES;
@@ -68,15 +54,17 @@ void spi_init(void){
   {
     Error_Handler();
   }
-
-}
-
-void spi_write(uint8_t* buffer,uint32_t len){
-    HAL_SPI_Transmit(&hspi1,buffer,len,SPI_TIMEOUT);
 }
 
 
 
-void spi_read(uint8_t* buffer,uint32_t len){
-    HAL_SPI_Receive(&hspi1,buffer,len,SPI_TIMEOUT);
+
+void spi_write(uint8_t* buffer,uint32_t len,uint32_t timeout){
+    HAL_SPI_Transmit(&hspi1,buffer,len,timeout);
+}
+
+
+
+void spi_read(uint8_t* buffer,uint32_t len,uint32_t timeout){
+    HAL_SPI_Receive(&hspi1,buffer,len,timeout);
 }

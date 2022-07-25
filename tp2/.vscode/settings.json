@@ -2,6 +2,8 @@
     "files.associations": {
         "core.h": "c",
         "main.h": "c",
-        "gpio.h": "c"
+        "gpio.h": "c",
+        "at45db041e.h": "c",
+        "spi.h": "c"
     }
 }

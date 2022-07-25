@@ -8,10 +8,10 @@ void gpio_init(GPIO_TypeDef *Portx, uint16_t Pin);
 
 
 
-void gpio_write(uint8_t* buffer,uint32_t len);
+void gpio_write(GPIO_TypeDef *Portx, uint16_t Pin,GPIO_PinState  state);
 
 
-void gpio_read(uint8_t* buffer,uint32_t len);
+GPIO_PinState  gpio_read(GPIO_TypeDef *Portx, uint16_t Pin);
 
 
 #endif
